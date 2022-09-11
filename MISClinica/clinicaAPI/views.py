@@ -9,17 +9,17 @@ def newFamiliar(request):
         try:
             data = json.loads(request.body)
 
-            perso = Persona.objects.filter(id = data["personaId"]).first()
-            if (not perso):
+            persona = Persona.objects.filter(id = data["personaId"]).first()
+            if (not persona):
                 return HttpResponseBadRequest("No existe persona con ese Id")
-            pacint = Paciente.objects.filter(id = data["pacienteId"]).first()
-            if (not pacint):
+            paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
+            if (not paciente):
                 return HttpResponseBadRequest("No existe Paciente con ese Id")    
             
             familiar = Familiar(
                 fami = data["number"],
-                persona = perso,
-                paciente = pacint,
+                persona = persona,
+                paciente = paciente,
                 parentesco = data["parentesco"],
                 email = data["email"],               
             )
