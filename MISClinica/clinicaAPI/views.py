@@ -1,8 +1,10 @@
+import datetime
 import json
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
-from models import Persona
+from django.db.models import Q
 
+from .models import Persona
 
 # Create your views here.
 def newPersona(request):
