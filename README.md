@@ -1,2 +1,16 @@
-# MinTic2022Ciclo3
-Proyecto para el Ciclo 3 de Misión TIC año 2022 UNAL Medellín
+### MIS Clinica
+
+Proyecto desarrollado para el Ciclo III del Diplomado de Programación de Misión TIC en la Universidad Nacional.
+
+## Desarrolladores del proyecto:
+- Ruth Theran
+- Rosa Silva
+- Sandra Díaz
+- Nicolás Arias
+- Ricardo Mazuera
+
+## Stack usado:
+- **Server:** Heroku
+- **Base de datos:** PostgreSQL
+- **Backend:** Django
+- **Frontend:** 
