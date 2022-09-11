@@ -1,9 +1,10 @@
+import datetime
+import json
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
-import json
-from .models import Familiar
 
-# Create your views here.
+from .models import Familiar, Persona
+
 def newFamiliar(request):
     if request.method == 'POST':
         try:
@@ -25,6 +26,20 @@ def newFamiliar(request):
             )
             familiar.save()
             return HttpResponse("Nueva familiar agregado")
+
+def newPersona(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            persona = Persona(
+                id = data["id"],
+                firstName = data["firstName"],
+                lastName = data["lastName"],
+                phone = data["phone"],
+                gender = data["gender"],
+            )
+            persona.save()
+            return HttpResponse("Nuevo cliente agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
