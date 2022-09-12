@@ -1,9 +1,54 @@
+import datetime
 import json
-from .models import Paciente
 from django.shortcuts import render
-from http.client import HTTPResponse, HttpResponseBadRequest, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 
-# Create your views here.
+from .models import Familiar, Persona, Paciente, Medico
+
+def newFamiliar(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+
+            persona = Persona.objects.filter(id = data["personaId"]).first()
+            if (not persona):
+                return HttpResponseBadRequest("No existe persona con ese Id")
+            paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
+            if (not paciente):
+                return HttpResponseBadRequest("No existe Paciente con ese Id")    
+            
+            familiar = Familiar(
+                fami = data["number"],
+                persona = persona,
+                paciente = paciente,
+                parentesco = data["parentesco"],
+                email = data["email"],               
+            )
+            familiar.save()
+            return HttpResponse("Nueva familiar agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+def newPersona(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            persona = Persona(
+                id = data["id"],
+                firstName = data["firstName"],
+                lastName = data["lastName"],
+                phone = data["phone"],
+                gender = data["gender"],
+            )
+            persona.save()
+            return HttpResponse("Nuevo cliente agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
+        
 def newPaciente(request):
     if request.method == 'POST':
         try:
@@ -17,7 +62,7 @@ def newPaciente(request):
                 longitude = data["longitude"],
             )
             paciente.save()
-            return HTTPResponse("Nuevo Paciente Agregado")
+            return HttpResponse("Nuevo Paciente Agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
@@ -34,6 +79,23 @@ def newJefeEnfermeria(request):
             )
             jefeenfermeria.save()
             return HTTPResponse("Nuevo Jefe Enfermería agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")   
+        
+
+def newMedico(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            medico = newMedico(
+                id = data["id"],
+                paciente = data["paciente"],
+                registro = data["registro"]
+             )
+            medico.save()
+            return HttpResponse("Nuevo medico agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
