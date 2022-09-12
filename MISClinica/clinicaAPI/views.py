@@ -91,6 +91,35 @@ def newRegistro(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+def getOnePaciente(request, id):
+    if request.method == 'GET':
+        paciente = Paciente.objects.filter(id = id).first()
+        if (not paciente):
+            return HttpResponseBadRequest("No existe paciente con esa cédula.")
+
+        persona = Persona.objects.filter(persona = id)
+        personaData = []
+        for p in persona:
+            data = {"id": p.number, "firstName": p.firstName, "lastName": p.lastName, "phone": p.phome, "gender": p.gender}
+            personaData.append(data)
+
+        data = {
+            "id": paciente.id,
+            "persona": personaData,
+            "address": paciente.address,
+            "city": paciente.city,
+            "birthday":paciente.birthday,
+            "latitude":paciente.latitude,
+            "longitude": paciente.longitude
+        }
+        dataJson = json.dumps(data)
+        resp = HttpResponse()
+        resp.headers['Content-Type'] = "text/json"
+        resp.content = dataJson
+        return resp
+    else:
+        return HttpResponseNotAllowed(['GET'], "Método inválido")
         
 def newPaciente(request):
     if request.method == 'POST':
@@ -166,4 +195,3 @@ def newEnfermeroAuxiliar(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
-
