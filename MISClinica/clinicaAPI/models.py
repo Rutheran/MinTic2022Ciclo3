@@ -33,20 +33,21 @@ class Registro (models.Model):
     sugerencia = models.CharField(max_length=50)
     historiaClinica = models.CharField(max_length=255)
 
-class JefeEnfermeria(models.Model):
+class Medico(models.Model):
     id = models.AutoField(primary_key=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    registro = models.ForeingKey(Registro, on_delete=models.CASCADE)
+    registro = models.ForeignKey(Registro,default=1, on_delete=models.CASCADE)
 
 class EnfermeroAuxiliar (models.Model):
     id = models.AutoField(primary_key=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    registro = models.ForeignKey(Registro, on_delete=models.CASCADE)
-    
+    registro = models.ForeignKey(Registro,default=1, on_delete=models.CASCADE)
 
-class Medico(models.Model):
+class JefeEnfermeria(models.Model):
     id = models.AutoField(primary_key=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    registro = models.ForeingKey(Registro, on_delete=models.CASCADE)
+    registro = models.ForeignKey(Registro,default=1, on_delete=models.CASCADE)    
+
+
 
 

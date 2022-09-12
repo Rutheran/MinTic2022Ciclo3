@@ -18,7 +18,7 @@ def newFamiliar(request):
                 return HttpResponseBadRequest("No existe Paciente con ese Id")    
             
             familiar = Familiar(
-                fami = data["number"],
+                familiar = data["number"],
                 persona = persona,
                 paciente = paciente,
                 parentesco = data["parentesco"],
@@ -31,29 +31,6 @@ def newFamiliar(request):
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
 
-
-def newEnfermeroAuxiliar(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
-            if (not paciente):
-                return HttpResponseBadRequest("No existe Paciente con ese Id")
-            registro = Registro.objects.filter(id = data["registroId"]).first()
-            if (not paciente):
-                return HttpResponseBadRequest("No existe Registro con ese Id")
-
-            enfermero = EnfermeroAuxiliar (
-                id = data["id"],
-                paciente = paciente,
-                registro = registro
-            )    
-            enfermero .save()
-            return HttpResponse("Nuevo enfermero auxiliar agregado")
-        except:
-            return HttpResponseBadRequest("Error en los datos enviados")
-    else:
-        return HttpResponseNotAllowed(['POST'], "Método inválido")
 
 def newPersona(request):
     if request.method == 'POST':
@@ -144,6 +121,29 @@ def newMedico(request):
              )
             medico.save()
             return HttpResponse("Nuevo medico agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+def newEnfermeroAuxiliar(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
+            if (not paciente):
+                return HttpResponseBadRequest("No existe Paciente con ese Id")
+            registro = Registro.objects.filter(id = data["registroId"]).first()
+            if (not paciente):
+                return HttpResponseBadRequest("No existe Registro con ese Id")
+
+            enfermero = EnfermeroAuxiliar (
+                id = data["id"],
+                paciente = paciente,
+                registro = registro
+            )    
+            enfermero .save()
+            return HttpResponse("Nuevo enfermero auxiliar agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
