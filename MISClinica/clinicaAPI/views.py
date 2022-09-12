@@ -126,7 +126,7 @@ def newJefeEnfermeria(request):
                 registro = data["registro"]
             )
             jefeenfermeria.save()
-            return HTTPResponse("Nuevo Jefe Enfermería agregado")
+            return HttpResponse("Nuevo Jefe Enfermería agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
