@@ -62,7 +62,7 @@ def newPaciente(request):
                 longitude = data["longitude"],
             )
             paciente.save()
-            return HTTPResponse("Nuevo Paciente Agregado")
+            return HttpResponse("Nuevo Paciente Agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
