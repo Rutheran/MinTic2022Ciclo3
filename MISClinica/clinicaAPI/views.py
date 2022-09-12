@@ -3,7 +3,7 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 
-from .models import Familiar, Persona
+from .models import Familiar, Persona, Paciente
 
 def newFamiliar(request):
     if request.method == 'POST':
@@ -48,3 +48,23 @@ def newPersona(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
+        
+def newPaciente(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            paciente = Paciente(
+                id_paciente = data["id_paciente"],
+                address = data["address"],
+                city = data["city"],
+                birthday = data["birthday"],
+                latitude = data["latitude"],
+                longitude = data["longitude"],
+            )
+            paciente.save()
+            return HTTPResponse("Nuevo Paciente Agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'],"Método Inválido")
+
