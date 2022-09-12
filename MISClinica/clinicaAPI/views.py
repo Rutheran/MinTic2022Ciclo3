@@ -22,3 +22,19 @@ def newPaciente(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'],"Método Inválido")
+
+def newJefeEnfermeria(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            jefeenfermeria = newJefeEnfermeria(
+                id = data["id"],
+                paciente = data["paciente"],
+                registro = data["registro"]
+            )
+            jefeenfermeria.save()
+            return HTTPResponse("Nuevo Jefe Enfermería agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
