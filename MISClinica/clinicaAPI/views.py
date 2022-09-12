@@ -1,9 +1,28 @@
+import json
+from urllib import response
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
-import json
-from .models import EnfermeroAuxiliar, Familiar, Registro
+from .models import Familiar, Persona, Paciente, Medico, JefeEnfermeria, EnfermeroAuxiliar, Registro
 
-# Create your views here.
+def getAllPacientes(request):
+    if request.method == 'GET':
+        pacientes = Paciente.objects.all()
+        if (not pacientes):
+            return HttpResponseBadRequest("No hay pacientes en la base de datos.")
+
+            allPacientesData = []
+            for x in pacientes:
+                data = {"id": x.id, "persona": x.persona, "address": x.address, "city": x.city, "birthday": x.birthday, "latitude": x.latitude, "longitude": x.longitude}
+                allPacientesData.append(data)
+            dataJson = json.dumps(allPacientesData)
+            resp = HttpResponse()
+            resp.headers['Content-Type'] = "text/jason"
+            resp.content = dataJson
+            return resp
+        else: 
+            return HttpResponseNotAllowed(['GET'], "Método inválido")
+
+
 def newFamiliar(request):
     if request.method == 'POST':
         try:
@@ -17,7 +36,7 @@ def newFamiliar(request):
                 return HttpResponseBadRequest("No existe Paciente con ese Id")    
             
             familiar = Familiar(
-                fami = data["number"],
+                familiar = data["number"],
                 persona = persona,
                 paciente = paciente,
                 parentesco = data["parentesco"],
@@ -31,30 +50,23 @@ def newFamiliar(request):
         return HttpResponseNotAllowed(['POST'], "Método inválido")
 
 
-
-def newEnfermeroAuxiliar(request):
+def newPersona(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
-            if (not paciente):
-                return HttpResponseBadRequest("No existe Paciente con ese Id")
-            registro = Registro.objects.filter(id = data["registroId"]).first()
-            if (not paciente):
-                return HttpResponseBadRequest("No existe Registro con ese Id")
-
-            enfermero = EnfermeroAuxiliar (
+            persona = Persona(
                 id = data["id"],
-                paciente = paciente,
-                registro = registro
-            )    
-            enfermero .save()
-            return HttpResponse("Nuevo enfermero auxiliar agregado")
+                firstName = data["firstName"],
+                lastName = data["lastName"],
+                phone = data["phone"],
+                gender = data["gender"],
+            )
+            persona.save()
+            return HttpResponse("Nuevo cliente agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
-
 
 def newRegistro(request):
     if request.method == 'POST':
@@ -79,7 +91,6 @@ def newRegistro(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
-
 
 def getOnePaciente(request, id):
     if request.method == 'GET':
@@ -109,3 +120,78 @@ def getOnePaciente(request, id):
         return resp
     else:
         return HttpResponseNotAllowed(['GET'], "Método inválido")
+        
+def newPaciente(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            paciente = Paciente(
+                id_paciente = data["id_paciente"],
+                address = data["address"],
+                city = data["city"],
+                birthday = data["birthday"],
+                latitude = data["latitude"],
+                longitude = data["longitude"],
+            )
+            paciente.save()
+            return HttpResponse("Nuevo Paciente Agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'],"Método Inválido")
+
+def newJefeEnfermeria(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            jefeenfermeria = newJefeEnfermeria(
+                id = data["id"],
+                paciente = data["paciente"],
+                registro = data["registro"]
+            )
+            jefeenfermeria.save()
+            return HttpResponse("Nuevo Jefe Enfermería agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")   
+        
+
+def newMedico(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            medico = newMedico(
+                id = data["id"],
+                paciente = data["paciente"],
+                registro = data["registro"]
+             )
+            medico.save()
+            return HttpResponse("Nuevo medico agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+def newEnfermeroAuxiliar(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
+            if (not paciente):
+                return HttpResponseBadRequest("No existe Paciente con ese Id")
+            registro = Registro.objects.filter(id = data["registroId"]).first()
+            if (not paciente):
+                return HttpResponseBadRequest("No existe Registro con ese Id")
+
+            enfermero = EnfermeroAuxiliar (
+                id = data["id"],
+                paciente = paciente,
+                registro = registro
+            )    
+            enfermero .save()
+            return HttpResponse("Nuevo enfermero auxiliar agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
