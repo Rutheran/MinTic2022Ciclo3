@@ -16,6 +16,11 @@ class Paciente(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
 
+class JefeEnfermeria(models.Model):
+    id = models.AutoField(primary_key=True)
+    paciente = models.ForeignKey(Persona, on_delete=models.CASCADE)
+    registro = models.ForeingKey(Registro, on_delete=models.CASCADE)
+
 class Familiar (models.Model):
     familiar = models.AutoField(primary_key=True)
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
@@ -27,3 +32,4 @@ class Medico(models.Model):
     id = models.AutoField(primary_key=True)
     paciente = models.ForeignKey(Persona, on_delete=models.CASCADE)
     # registro = models.ForeingKey(Registro, related_name='medico', on_delete=models.CASCADE)
+
