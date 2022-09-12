@@ -14,9 +14,9 @@ class Paciente(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
     address = models.CharField(max_length=30)
     city = models.CharField(max_length=20)
-    birthday = models.DateField()
+    birthday = models.CharField(max_length=20)
     latitude = models.FloatField()
-    longitude = models.FloatField()
+    longitud = models.FloatField()
 
 class Familiar (models.Model):
     id = models.AutoField(primary_key=True)
@@ -28,32 +28,25 @@ class Familiar (models.Model):
 class Registro (models.Model):
     id = models.AutoField(primary_key=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    signosVitales = models.BigIntegerField()
     diagnostico = models.CharField(max_length=100)
     sugerencia = models.CharField(max_length=50)
     historiaClinica = models.CharField(max_length=255)
 
-class Paciente(models.Model):
-    id = models.AutoField(primary_key= True)
-    persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
-    address = models.CharField(max_length=30)
-    city = models.CharField(max_length=20)
-    birthday = models.DateField()
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-
 class Medico(models.Model):
     id = models.AutoField(primary_key=True)
+    persona = models.ForeignKey(Persona,default=1, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     registro = models.ForeignKey(Registro,default=1, on_delete=models.CASCADE)
 
 class EnfermeroAuxiliar (models.Model):
     id = models.AutoField(primary_key=True)
+    persona = models.ForeignKey(Persona, default=1, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     registro = models.ForeignKey(Registro,default=1, on_delete=models.CASCADE)
 
 class JefeEnfermeria(models.Model):
     id = models.AutoField(primary_key=True)
+    persona = models.ForeignKey(Persona,default=1, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     registro = models.ForeignKey(Registro,default=1, on_delete=models.CASCADE)    
 
