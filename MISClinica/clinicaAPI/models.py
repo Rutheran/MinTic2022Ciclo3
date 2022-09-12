@@ -1,5 +1,11 @@
 from django.db import models
 
+
+class Medico(models.Model):
+    id = models.AutoField(primary_key=True)
+    paciente = models.ForeignKey(Persona, related_name='medico', on_delete=models.CASCADE)
+    registro = models.ForeingKey(Registro, related_name='medico', on_delete=models.CASCADE)
+
 class Persona(models.Model):
     id = models.BigIntegerField(primary_key=True)
     firstName = models.CharField(max_length=50)
@@ -22,4 +28,5 @@ class Familiar (models.Model):
     paciente = models.ForeignKey(Paciente, related_name='paciente', on_delete=models.CASCADE)
     parentesco = models.CharField(max_length=15)
     email = models.EmailField(max_length=100)
+
 
