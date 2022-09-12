@@ -26,6 +26,10 @@ def newFamiliar(request):
             )
             familiar.save()
             return HttpResponse("Nueva familiar agregado")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
 
 def newPersona(request):
     if request.method == 'POST':
