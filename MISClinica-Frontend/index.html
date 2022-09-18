@@ -6,13 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Document</title>
 </head>
 
 <body>
-    <h1 class="text-3xl font-bold text-amber-600">
-        Hello world!
-      </h1>
+    <div class="flex flex-row h-full">
+        <!-- Sidebar -->
+        <nav class="bg-gray-900 w-60 justify-between flex flex-col align-left">
+            <div class="mt-10 mb-10">
+                <a href="#">
+                    <img src="https://randomuser.me/api/portraits/women/76.jpg"
+                        class="rounded-full w-10 h-10 mb-3 mx-auto" />
+                </a>
+                <div class="ml-6 mt-10 text-white">
+                    <ul class="mb-6">
+                        <li class="mb-6">
+                            <p class=" underline font-bold">Navegación</p>
+                            <a href="#">
+                                <p class="ml-3">- Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="mb-6">
+                            <p class=" underline font-bold">Creación</p>
+                            <a href="#">
+                                <p class="ml-3">- Persona</p>
+                            </a>
+                            <a href="#">
+                                <p class="ml-3">- Paciente</p>
+                            </a>
+                            <a href="#">
+                                <p class="ml-3">- Familiar</p>
+                            </a>
+                            <a href="#">
+                                <p class="ml-3">- Médico</p>
+                            </a>
+                        </li>
+                        <li class="mb-6">
+                            <p class=" underline font-bold">Consulta</p>
+                            <a href="#">
+                                <p class="ml-3">- Todos los pacientes</p>
+                            </a>
+                            <a href="#">
+                                <p class="ml-3">- Paciente</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="container mx-auto">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Iniciar Sesión
+                      </button>
+                      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Registrate
+                      </button>
+                </div>
+            </div>
+        </nav>
+        <div class="px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen">
+            <!-- Content -->
+        </div>
+    </div>
 </body>
 
 
