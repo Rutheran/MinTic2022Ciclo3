@@ -20,6 +20,26 @@ async function  getAllPacients(){
     });
 }
 
-getAllPacients ();
+handlePacientes() {
+    const divs = [];
+    pacientes.forEach ((pasc) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <h3> Documento de identidad: ${pasc.id}</h3>
+          <h3> Nombre: ${pasc.firstName}</h3>
+          <h3> Apellido: ${pasc.lastName}</h3>
+          <h3> Celular: ${pasc.adress}</h3>
+          <h3> Adress: ${pasc.adress}</h3>
+          <h3> Adress: ${pasc.adress}</h3>
+          <h3> City: ${pasc.city}</h3>
+          <h3> Birthday: ${pasc.birthday}</h3>
+          <h3> Latilude: ${pasc.latitude}</h3>
+          <h3> Longitude: ${pasc.longitude}</h3>
+          `;
+        divs.push(div);
+    });
+    document.getElementById("Cargando").remove();
+    const 
+}
 
 
