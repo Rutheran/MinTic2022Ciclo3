@@ -6,7 +6,6 @@ Proyecto desarrollado para el Ciclo III del Diplomado de Programación de Misió
 - Ruth Theran
 - Rosa Silva
 - Sandra Díaz
-- Nicolás Arias
 - Ricardo Mazuera
 
 ## Stack usado:
