@@ -184,7 +184,7 @@ def getAllPacientes(request):
         allPacientesData = []
         for x,y in zip(pacientes,personas):
             data = {    
-                    "id": x.id,
+                    "id": y.id,
                     "firstName": y.firstName,
                     "lastName": y.lastName,
                     "phone": y.phone,
@@ -215,7 +215,7 @@ def getOnePaciente(request, id):
             return HttpResponseBadRequest("No existe paciente con esa cédula.")
 
         data = {
-            "id": paciente.id,
+            "id": persona.id,
             "firstName": persona.firstName, 
             "lastName": persona.lastName, 
             "phone": persona.phone, 
