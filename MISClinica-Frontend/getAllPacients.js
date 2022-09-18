@@ -1,7 +1,7 @@
 pacientes = [];
 
-function getAllPacientes(){
-    fetch('http://127.0.0.1:8000/getAllPacientes')
+async function  getAllPacients(){
+    await fetch('http://127.0.0.1:8000/getAllPacientes')
     .then(response => {
         console.log (response);
         if (response.ok)
@@ -20,6 +20,6 @@ function getAllPacientes(){
     });
 }
 
-getAllPacientes ();
+getAllPacients ();
 
 
