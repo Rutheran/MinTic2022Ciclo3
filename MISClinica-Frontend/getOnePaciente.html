@@ -11,13 +11,7 @@
 
 <body>
 
-<<<<<<< HEAD
 
-       <div id="buscar">
-        <form>
-            <input type="text" id="buscador" name="name" placeholder="busca" autocomplete="off" />
-        </form>
-=======
     <div class="flex flex-row h-full">
         <!-- Sidebar -->
 
@@ -95,17 +89,23 @@
 
         <div class="px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen ml-60">
             <!-- Content -->
+
             <div class="main-component h-48">
                 <h1 class="text-center text-4xl font-bold my-10"> Buscar un paciente</h1>
+                <div id="buscar">
+                    <form>
+                        <input type="text" id="buscador" name="name" placeholder="busca" autocomplete="off" />
+                    </form>
+                    <div id="resultado"></div>
+                </div>
                 <div class="grid grid-cols-3" id="info-pacientes">
                     <div class="text-xl bold" id="cargando"> Cargando...</div>
                     <!-- This example requires Tailwind CSS v2.0+ -->
                 </div>
             </div>
         </div>
->>>>>>> main
     </div>
-    <div id="resultado"></div>
+
 
 
 
