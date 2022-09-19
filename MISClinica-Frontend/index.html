@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script tailwindcss build main.css -o output.cssscript>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Document</title>
+
+    <title>MIS Clínica</title>
 </head>
 
 <body>
     <div class="flex flex-row h-full">
         <!-- Sidebar -->
-        <nav class="bg-gray-900 w-60 justify-between flex flex-col align-left">
+        <nav class="bg-gray-900 w-60 justify-between flex flex-col align-left h-full fixed">
             <div class="mt-10 mb-10">
                 <a href="#">
                     <img src="https://randomuser.me/api/portraits/women/76.jpg"
@@ -22,51 +23,215 @@
                 <div class="ml-6 mt-10 text-white">
                     <ul class="mb-6">
                         <li class="mb-6">
-                            <p class=" underline font-bold">Navegación</p>
-                            <a href="#">
-                                <p class="ml-3">- Dashboard</p>
+                            <p class=" text-blue-300 font-bold">Navegación</p>
+                            <a href="./index.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Dashboard</p>
+                                </div>
                             </a>
                         </li>
                         <li class="mb-6">
-                            <p class=" underline font-bold">Creación</p>
-                            <a href="#">
-                                <p class="ml-3">- Persona</p>
+                            <p class=" text-blue-300 font-bold">Creación</p>
+                            <a href="./newPerson.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Persona</p>
+                                </div>
                             </a>
-                            <a href="#">
-                                <p class="ml-3">- Paciente</p>
+                            <a href="./newPacient.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Paciente</p>
+                                </div>
                             </a>
-                            <a href="#">
-                                <p class="ml-3">- Familiar</p>
+                            <a href="./newFamiliar.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Familiar</p>
+                                </div>
                             </a>
-                            <a href="#">
-                                <p class="ml-3">- Médico</p>
+                            <a href="./newMedico.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Médico</p>
+                                </div>
                             </a>
                         </li>
                         <li class="mb-6">
-                            <p class=" underline font-bold">Consulta</p>
-                            <a href="#">
-                                <p class="ml-3">- Todos los pacientes</p>
+                            <p class=" text-blue-300 font-bold">Consulta</p>
+                            <a href="./getAllPacients.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Todos los pacientes</p>
+                                </div>
                             </a>
-                            <a href="#">
-                                <p class="ml-3">- Paciente</p>
+                            <a href="./getOnePaciente.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Paciente</p>
+                                </div>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="mb-4 flex justify-center">
-                <div class="">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Iniciar Sesión
-                      </button>
-                      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Registrate
-                      </button>
-                </div>
+            <div class="grid gap-4 place-content-center h-48">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Iniciar Sesión
+                </button>
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    Regístrate
+                </button>
             </div>
         </nav>
-        <div class="px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen">
+
+        <div class=" px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen ml-60">
             <!-- Content -->
+
+            <div class="grid grid-cols-3 h-full place-items-center">
+
+                <div
+                    class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+                    <img class="rounded-t-lg" src="https://i.ibb.co/yNdxGTY/6.jpg" alt="">
+
+                    <div class="p-5">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Crear una
+                            persona</h5>
+
+                        <a href="./newPerson.html"
+                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Crear
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+                    <img class="rounded-t-lg" src="https://i.ibb.co/YLm7w78/1.jpg" alt="">
+
+                    <div class="p-5">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Crear un
+                            paciente</h5>
+
+                        <a href="./newPacient.html"
+                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Crear
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+                    <img class="rounded-t-lg" src="https://i.ibb.co/LYw4Gkh/5.jpg" alt="">
+
+                    <div class="p-5">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Crear un
+                            familiar</h5>
+                        <a href="./newFamiliar.html"
+                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Crear
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+                    <img class="rounded-t-lg" src="https://i.ibb.co/pPLrbYP/2.jpg" alt="">
+
+                    <div class="p-5">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Crear un
+                            médico</h5>
+
+                        <a href="./newMedico.html"
+                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Crear
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+                    <img class="rounded-t-lg" src="https://i.ibb.co/mbkCnh3/3.jpg" alt="">
+
+                    <div class="p-5">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Ver todos
+                            los pacientes</h5>
+
+                        <a href="./getAllPacients.html"
+                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Ver
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+                    <img class="rounded-t-lg" src="https://i.ibb.co/zXrBsfg/4.jpg
+                        " alt="">
+
+                    <div class="p-5">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Consultar
+                            un
+                            paciente</h5>
+
+                        <a href="./getOnePaciente.html"
+                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Consultar
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </body>
