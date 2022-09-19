@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <title>Nueva Persona - MIS Clínica</title>
+</head>
+
+<body>
+    <div class="flex flex-row h-full">
+        <!-- Sidebar -->
+        <nav class="bg-gray-900 w-60 justify-between flex flex-col align-left h-full fixed">
+            <div class="mt-10 mb-10">
+                <a href="#">
+                    <img src="https://randomuser.me/api/portraits/women/76.jpg"
+                        class="rounded-full w-10 h-10 mb-3 mx-auto" />
+                </a>
+                <div class="ml-6 mt-10 text-white">
+                    <ul class="mb-6">
+                        <li class="mb-6">
+                            <p class=" text-blue-300 font-bold">Navegación</p>
+                            <a href="./index.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Dashboard</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="mb-6">
+                            <p class=" text-blue-300 font-bold">Creación</p>
+                            <a href="./newPerson.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Persona</p>
+                                </div>
+                            </a>
+                            <a href="./newPacient.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Paciente</p>
+                                </div>
+                            </a>
+                            <a href="./newFamiliar.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Familiar</p>
+                                </div>
+                            </a>
+                            <a href="./newMedico.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Médico</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="mb-6">
+                            <p class=" text-blue-300 font-bold">Consulta</p>
+                            <a href="./getAllPacients.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Todos los pacientes</p>
+                                </div>
+                            </a>
+                            <a href="./getOnePaciente.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Paciente</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid gap-4 place-content-center h-48">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Iniciar Sesión
+                </button>
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    Regístrate
+                </button>
+            </div>
+        </nav>
+
+        <div class=" px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen ml-60">
+            <!-- Content -->
+
+            <h1 class="text-center text-4xl bold mt-10">Crear una nueva Persona</h1>
+            <div class="w-full grid justify-center mt-20">
+                <div class="">
+                    <div class="">
+                        <div class="md:col-span-2 md:mt-0">
+                            <form action="#" method="POST">
+                                <div class="overflow-hidden shadow sm:rounded-md">
+                                    <div class="bg-white px-4 py-5 sm:p-6">
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-4">
+                                                <label for="id-dni"
+                                                    class="block text-sm font-medium text-gray-700">Documento de identidad</label>
+                                                <input type="text" name="id-dni" id="id-dni"
+                                                    
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            </div>
+
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="first-name"
+                                                    class="block text-sm font-medium text-gray-700">Nombre</label>
+                                                <input type="text" name="first-name" id="first-name"
+                                                    autocomplete="given-name"
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            </div>
+
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="last-name"
+                                                    class="block text-sm font-medium text-gray-700">Apellido</label>
+                                                <input type="text" name="last-name" id="last-name"
+                                                    autocomplete="family-name"
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            </div>
+
+                                            <div class="col-span-6 sm:col-span-4">
+                                                <label for="phone"
+                                                    class="block text-sm font-medium text-gray-700">Teléfono</label>
+                                                <input type="text" name="phone" id="phone"
+                                                    autocomplete="tel"
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            </div>
+
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="country"
+                                                    class="block text-sm font-medium text-gray-700">Género</label>
+                                                <select id="gender" name="gender" autocomplete="gender-name"
+                                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                    <option></option>
+                                                    <option>Femenino</option>
+                                                    <option>Masculino</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                        <button type="submit"
+                                            class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Registrar Persona</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

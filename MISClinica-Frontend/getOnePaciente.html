@@ -5,21 +5,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Buscar un paciente - MIS Clínica</title>
 </head>
 
 <body>
 
+<<<<<<< HEAD
 
        <div id="buscar">
         <form>
             <input type="text" id="buscador" name="name" placeholder="busca" autocomplete="off" />
         </form>
+=======
+    <div class="flex flex-row h-full">
+        <!-- Sidebar -->
+
+        <nav class="bg-gray-900 w-60 justify-between flex flex-col align-left h-full fixed">
+            <div class="mt-10 mb-10">
+                <a href="#">
+                    <img src="https://randomuser.me/api/portraits/women/76.jpg"
+                        class="rounded-full w-10 h-10 mb-3 mx-auto" />
+                </a>
+                <div class="ml-6 mt-10 text-white">
+                    <ul class="mb-6">
+                        <li class="mb-6">
+                            <p class=" text-blue-300 font-bold">Navegación</p>
+                            <a href="./index.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Dashboard</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="mb-6">
+                            <p class=" text-blue-300 font-bold">Creación</p>
+                            <a href="./newPerson.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Persona</p>
+                                </div>
+                            </a>
+                            <a href="./newPacient.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Paciente</p>
+                                </div>
+                            </a>
+                            <a href="./newFamiliar.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Familiar</p>
+                                </div>
+                            </a>
+                            <a href="./newMedico.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Médico</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="mb-6">
+                            <p class=" text-blue-300 font-bold">Consulta</p>
+                            <a href="./getAllPacients.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Todos los pacientes</p>
+                                </div>
+                            </a>
+                            <a href="./getOnePaciente.html">
+                                <div class="flex ">
+                                    <p class="ml-3">-</p>
+                                    <p class=" ml-2 hover:text-blue-500">Paciente</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid gap-4 place-content-center h-48">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Iniciar Sesión
+                </button>
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    Regístrate
+                </button>
+            </div>
+        </nav>
+
+        <div class="px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen ml-60">
+            <!-- Content -->
+            <div class="main-component h-48">
+                <h1 class="text-center text-4xl font-bold my-10"> Buscar un paciente</h1>
+                <div class="grid grid-cols-3" id="info-pacientes">
+                    <div class="text-xl bold" id="cargando"> Cargando...</div>
+                    <!-- This example requires Tailwind CSS v2.0+ -->
+                </div>
+            </div>
+        </div>
+>>>>>>> main
     </div>
     <div id="resultado"></div>
 
 
-    <script src="./getOnePaciente.js"></script>
+
+
+    <script src="./js/getOnePacient.js"></script>
 
 </body>
 
