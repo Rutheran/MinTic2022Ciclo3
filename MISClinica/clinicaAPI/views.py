@@ -194,7 +194,7 @@ def getAllPacientes(request):
                     "birthday": x.birthday,
                     "latitude": x.latitude, 
                     "longitud": x.longitud
-                        }
+                    }
             allPacientesData.append(data)
         dataJson = json.dumps(allPacientesData)
         resp = HttpResponse()
