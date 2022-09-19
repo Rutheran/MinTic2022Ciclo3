@@ -93,10 +93,17 @@
             <div class="main-component h-48">
                 <h1 class="text-center text-4xl font-bold my-10"> Buscar un paciente</h1>
                 <div id="buscar">
-                    <form>
-                        <input type="text" id="buscador" name="name" placeholder="busca" autocomplete="off" />
-                    </form>
-                    <div id="resultado"></div>
+
+
+                    <input type="text" id="searchId" placeholder="Documento de identidad">
+                    <button type="button" onclick="getOnePacient()">
+                       Buscar
+                    </button>
+
+                    <p id="valueInput"></p>
+
+
+
                 </div>
                 <div class="grid grid-cols-3" id="info-pacientes">
                     <div class="text-xl bold" id="cargando"> Cargando...</div>
@@ -110,7 +117,7 @@
 
 
 
-    <script src="./js/getOnePacient.js"></script>
+    <script src="./js/getOnePaciente.js"></script>
 
 </body>
 
