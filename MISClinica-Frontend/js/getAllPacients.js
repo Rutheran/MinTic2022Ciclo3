@@ -1,7 +1,7 @@
 pacientes = [];
 
 async function getAllPacients() {
-  await fetch("http://127.0.0.1:8000/getAllPacientes")
+  await fetch("https://minclinica.herokuapp.com/getAllPacientes")
     .then((response) => {
       console.log(response);
       if (response.ok) return response.text();
