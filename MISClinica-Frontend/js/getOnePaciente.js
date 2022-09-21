@@ -66,3 +66,4 @@ const handlePaciente = (paciente) => {
   const info = document.getElementById("info-pacientes");
   info.appendChild(pacDiv);
 };
+
