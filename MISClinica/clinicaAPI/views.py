@@ -33,14 +33,18 @@ def newPersona(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            persona = Persona(
-                id = data["id"],
-                firstName = data["firstName"],
-                lastName = data["lastName"],
-                phone = data["phone"],
-                gender = data["gender"],
-            )
-            persona.save()
+            persona = Persona.objects.filter(id = data["personaId"]).first()
+            if (persona):
+                return HttpResponseBadRequest("Ya existe una persona con ese documento de identidad")
+            else:
+                persona = Persona(
+                    id = data["id"],
+                    firstName = data["firstName"],
+                    lastName = data["lastName"],
+                    phone = data["phone"],
+                    gender = data["gender"],
+                )
+                persona.save()
             return HttpResponse("Nuevo cliente agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
@@ -184,7 +188,8 @@ def getAllPacientes(request):
         allPacientesData = []
         for x,y in zip(pacientes,personas):
             data = {    
-                    "id": y.id,
+                    "id": x.id,
+                    "dni": y.id,
                     "firstName": y.firstName,
                     "lastName": y.lastName,
                     "phone": y.phone,
@@ -194,7 +199,7 @@ def getAllPacientes(request):
                     "birthday": x.birthday,
                     "latitude": x.latitude, 
                     "longitud": x.longitud
-                        }
+                    }
             allPacientesData.append(data)
         dataJson = json.dumps(allPacientesData)
         resp = HttpResponse()
@@ -215,7 +220,8 @@ def getOnePaciente(request, id):
             return HttpResponseBadRequest("No existe paciente con esa cédula.")
 
         data = {
-            "id": persona.id,
+            "id": paciente.id,
+            "dni": persona.id,
             "firstName": persona.firstName, 
             "lastName": persona.lastName, 
             "phone": persona.phone, 
