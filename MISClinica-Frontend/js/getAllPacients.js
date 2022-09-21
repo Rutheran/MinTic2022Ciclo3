@@ -1,7 +1,8 @@
 pacientes = [];
+const API_URL = "https://minclinica.herokuapp.com/getAllPacientes";
 
 async function getAllPacients() {
-  await fetch("http://127.0.0.1:8000/getAllPacientes")
+  await fetch(API_URL)
     .then((response) => {
       console.log(response);
       if (response.ok) return response.text();
@@ -24,7 +25,7 @@ function handlePacientes() {
     const div = document.createElement("div");
     div.innerHTML = `
     
-        <div class="overflow-hidden bg-white shadow sm:rounded-lg w-96">
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg w-72">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6 text-gray-900">${pasc.firstName} ${pasc.lastName}</h3>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">Nombre completo</p>
