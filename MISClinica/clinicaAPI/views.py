@@ -215,7 +215,8 @@ def getOnePaciente(request, id):
             return HttpResponseBadRequest("No existe paciente con esa cédula.")
 
         data = {
-            "id": persona.id,
+            "id": paciente.id,
+            "id_pers": persona.id,
             "firstName": persona.firstName, 
             "lastName": persona.lastName, 
             "phone": persona.phone, 
