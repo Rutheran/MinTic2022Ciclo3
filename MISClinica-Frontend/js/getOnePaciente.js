@@ -3,21 +3,35 @@ json = [];
 
 async function getAllPacients() {
   await fetch("https://minclinica.herokuapp.com/getAllPacientes")
-    .then((response) => {
+    // .then((response) => {
       // console.log(response);
-      if (response.ok) return response.text();
-      else throw new Error(response.status);
-    })
-    .then((data) => {
-      console.log("Datos: " + data);
-      pacientes = JSON.parse(data);
-      getOnePacient(pacientes);
-    })
-    .catch((error) => {
-      console.error("ERROR: ", error.message);
-      // handleError();
-    });
-  // getOnePacient();
+// const getValueInput = () => {
+//   let id_paciente = document.getElementById("searchId").value;
+//   // return id_paciente;
+
+//   document.getElementById("valueInput").innerHTML = id_paciente;
+// };
+
+// async function getOnePacient() {
+//   let id_paciente = document.getElementById("searchId").value;
+//   let API_URL = "http://127.0.0.1:8000/getOnePaciente/" + id_paciente;
+//   console.log (API_URL)
+//   await fetch(API_URL)
+//     .then((response) => {
+//       console.log(response);
+//       if (response.ok) return response.text();
+//       else throw new Error(response.status);
+//     })
+//     .then((data) => {
+//       console.log("Datos: " + data);
+//       pacientes = JSON.parse(data);
+//       getOnePacient(pacientes);
+//     })
+//     .catch((error) => {
+//       console.error("ERROR: ", error.message);
+//       // handleError();
+//     });
+//   // getOnePacient();
 }
 
 async function getOnePacient(pacientes) {
