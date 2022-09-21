@@ -1,61 +1,53 @@
-const API_URL = "https://minclinica.herokuapp.com/getOnePaciente";
+const API_URL = "https://minclinica.herokuapp.com/getOnePaciente/";
 json = [];
 
 async function getAllPacients() {
   await fetch("https://minclinica.herokuapp.com/getAllPacientes")
-    // .then((response) => {
-      // console.log(response);
-// const getValueInput = () => {
-//   let id_paciente = document.getElementById("searchId").value;
-//   // return id_paciente;
-
-//   document.getElementById("valueInput").innerHTML = id_paciente;
-// };
-
-// async function getOnePacient() {
-//   let id_paciente = document.getElementById("searchId").value;
-//   let API_URL = "http://127.0.0.1:8000/getOnePaciente/" + id_paciente;
-//   console.log (API_URL)
-//   await fetch(API_URL)
-//     .then((response) => {
-//       console.log(response);
-//       if (response.ok) return response.text();
-//       else throw new Error(response.status);
-//     })
-//     .then((data) => {
-//       console.log("Datos: " + data);
-//       pacientes = JSON.parse(data);
-//       getOnePacient(pacientes);
-//     })
-//     .catch((error) => {
-//       console.error("ERROR: ", error.message);
-//       // handleError();
-//     });
-//   // getOnePacient();
-}
-
-async function getOnePacient(pacientes) {
-  console.log(pacientes);
-  const pacienteId = 1;
-  // const parsedUrl = new URL(window.location.href);
-  // const id = parsedUrl.searchParams.get("id");
-  // console.log(id);
-
-  await fetch(`${API_URL}/${pacienteId}`)
     .then((response) => {
       // console.log(response);
       if (response.ok) return response.text();
       else throw new Error(response.status);
     })
     .then((data) => {
-      // console.log(data);
-      json = JSON.parse(data);
-      handlePaciente(json);
+      pacientes = JSON.parse(data);
+      // console.log(pacientes);
+      getOnePacient(pacientes);
+    })
+    .catch((error) => {
+      console.error("ERROR: ", error.message);
+      handleError();
+    });
+}
+
+async function getOnePacient(pacientes) {
+  let id_paciente = document.getElementById("searchId").value;
+
+  function filterByID(paciente) {
+    if (paciente.dni == id_paciente) {
+      return true;
+    }
+    return false;
+  }
+
+  const filteredPaciente = pacientes.filter(filterByID)[0];
+  // console.log (filteredPaciente)
+
+  await fetch(`${API_URL}${filteredPaciente.id}`)
+    .then((response) => {
+      // console.log(response);
+      if (response.ok) return response.text();
+      else throw new Error(response.status);
+    })
+    .then((data) => {
+      // console.log("Datos: " + data);
+      pacientes = JSON.parse(data);
+      handlePaciente(pacientes);
     })
     .catch((error) => {
       console.error("ERROR: ", error.message);
       // handleError();
     });
+  // getOnePacient();
 }
 
 const handlePaciente = (paciente) => {
@@ -74,5 +66,3 @@ const handlePaciente = (paciente) => {
   const info = document.getElementById("info-pacientes");
   info.appendChild(pacDiv);
 };
-
-document.addEventListener("DOMContentLoaded", getAllPacients);
