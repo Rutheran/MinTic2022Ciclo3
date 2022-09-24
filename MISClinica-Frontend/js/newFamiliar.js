@@ -1,4 +1,4 @@
-const newPacienteUrl = 'https://minclinica.herokuapp.com/newPaciente'
+const newFamiliarUrl = 'https://minclinica.herokuapp.com/newFamiliar'
 
 function validate_id(val) {
     if (Number(val) > 1000)
@@ -10,35 +10,31 @@ function validate_id(val) {
 
 function collectData(evt) {
     evt.preventDefault();
-    const idPersona = document.newPaciente.idPersona.value;
-    const address = document.newPaciente.address.value.trim();
-    const city = document.newPaciente.city.value.trim();
-    const birthday = document.newPaciente.birthday.value;
-    const latitude = document.newPaciente.latitude.value;
-    const longitud = document.newPaciente.longitud.value;
+    const id = document.newFamiliar.id.value;
+    const paciente = document.newFamiliar.idPaciente.value.trim();
+    const parentesco = document.newFamiliar.parentesco.value.trim();
+    const email = document.newFamiliar.email.value.trim();
 
-    let result = validate_id(idPersona);
+
+    let result = validate_id(id);
     if (!result) {
         alert('Cédula no es válida');
         return;
     }
     
-    const paciente = {
-        pacienteId: idPersona,
-        personaId: idPersona,
-        address: address,
-        city: city,
-        birthday: birthday,
-        latitude: latitude,       
-        longitud:longitud
+    const familiar = {
+        personaId: id,
+        pacienteId: paciente,
+        parentesco: parentesco,
+        email: email
     }
-    console.log(paciente);
-    savePaciente(paciente)
+    console.log(familiar);
+    saveFamiliar(familiar)
 }
 
-async function savePaciente(data) {
+function saveFamiliar(data) {
     // Petición HTTP
-    await fetch(newPacienteUrl, {
+    fetch(newFamiliarUrl, {
         method: "POST",
         headers: {
             "Content-Type": "text/json"
@@ -57,8 +53,8 @@ async function savePaciente(data) {
             handleSuccess();
         })
         .catch(error => {
-            console.error("ERROR: ", error);
-            handleError(error);
+            console.error("ERROR: ", error.message);
+            handleError(error.message);
         });
 }
 
@@ -66,7 +62,7 @@ async function savePaciente(data) {
 function handleSuccess() {
     document.getElementById("formData").remove();
     const message = document.createElement("p");
-    message.innerText = "Paciente creado exitosamente.";
+    message.innerText = "Familiar creado exitosamente.";
     const info = document.getElementById("info");
     info.appendChild(message);
 }
@@ -74,10 +70,10 @@ function handleSuccess() {
 function handleError(msg) {
     document.getElementById("formData").remove();
     const message = document.createElement("p");
-    message.innerText = "Este paciente ya existe en nuestra base de datos";
+    message.innerText = "No se pudo crear el Familiar. Intente luego. " + msg;
     const info = document.getElementById("info");
     info.appendChild(message);
 }
 
 // --------------------
-document.newPaciente.addEventListener("submit", collectData);
+document.newFamiliar.addEventListener("submit", collectData);
