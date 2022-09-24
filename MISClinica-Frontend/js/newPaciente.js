@@ -1,13 +1,5 @@
-const newPersonaUrl = 'https://minclinica.herokuapp.com/newPersona'
+const newPacienteUrl = 'https://minclinica.herokuapp.com/newPaciente'
 
-
-function validate_names(val) {
-    const letters = /^[A-Z a-zÁÉÍÓÚáéíóúñ]+$/;
-    if (val.match(letters))
-        return true;
-    else
-        return false;
-}
 
 function validate_id(val) {
     if (Number(val) > 1000)
@@ -20,11 +12,12 @@ function validate_id(val) {
 function collectData(evt) {
     evt.preventDefault();
 
-    const id = document.newPerson.id.value;
-    const firstName = document.newPerson.firstName.value.trim();
-    const lastName = document.newPerson.lastName.value.trim();
-    const phone = document.newPerson.phone.value;
-    const gender = document.newPerson.gender.value;
+    const id = document.newPaciente.id.value;
+    const address = document.newPaciente.address.value.trim();
+    const city = document.newPaciente.city.value.trim();
+    const birthday = document.newPaciente.birthday.value;
+    const latitude = document.newPaciente.latitude.value;
+    const longitud = document.newPaciente.longitud.value;
 
     let result = validate_id(id);
     if (!result) {
@@ -32,21 +25,22 @@ function collectData(evt) {
         return;
     }
     
-    const persona = {
+    const paciente = {
         id: id,
-        firstName: firstName,
-        lastName: lastName,
-        phone: phone,
-        gender: gender       
+        address: address,
+        city: city,
+        birthday: birthday,
+        latitude: latitude,       
+        longitud:longitud
     }
-    console.log(persona);
-    const dataToSend = JSON.stringify(persona);
-    savePersona(dataToSend);
-}   
+    console.log(paciente);
+    const dataToSend = JSON.stringify(paciente);
+    savePaciente(dataToSend);
+}
 
-function savePersona(data) {
+function savePaciente(data) {
     // Petición HTTP
-    fetch(newPersonaUrl, {
+    fetch(newPacienteUrl, {
         method: "POST",
         headers: {
             "Content-Type": "text/json"
@@ -74,7 +68,7 @@ function savePersona(data) {
 function handleSuccess() {
     document.getElementById("formData").remove();
     const message = document.createElement("p");
-    message.innerText = "Persona creada exitosamente.";
+    message.innerText = "Paciente creado exitosamente.";
     const info = document.getElementById("info");
     info.appendChild(message);
 }
@@ -82,10 +76,10 @@ function handleSuccess() {
 function handleError(msg) {
     document.getElementById("formData").remove();
     const message = document.createElement("p");
-    message.innerText = "No se pudo crear la persona. Intente luego. " + msg;
+    message.innerText = "No se pudo crear el paciente. Intente luego. " + msg;
     const info = document.getElementById("info");
     info.appendChild(message);
 }
 
 // --------------------
-document.newPerson.addEventListener("submit", collectData);
+document.newPaciente.addEventListener("submit", collectData);
