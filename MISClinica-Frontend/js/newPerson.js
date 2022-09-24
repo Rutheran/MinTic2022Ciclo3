@@ -1,8 +1,8 @@
-const newPersonaUrl = 'https://minclinica.herokuapp.com/newPersona'
+const newPersonaUrl = "https://minclinica.herokuapp.com/newPersona"
 
 
 function validate_names(val) {
-    const letters = /^[A-Z a-zÁÉÍÓÚáéíóúñ]+$/;
+    const letters = /^[A-Z a-z]+$/;
     if (val.match(letters))
         return true;
     else
@@ -33,7 +33,7 @@ function collectData(evt) {
     }
     
     const persona = {
-        id: id,
+        personaId: id,
         firstName: firstName,
         lastName: lastName,
         phone: phone,
@@ -42,7 +42,7 @@ function collectData(evt) {
     console.log(persona);
     const dataToSend = JSON.stringify(persona);
     savePersona(dataToSend);
-}   
+}
 
 function savePersona(data) {
     // Petición HTTP

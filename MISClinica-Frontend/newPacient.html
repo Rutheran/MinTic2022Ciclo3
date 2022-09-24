@@ -92,18 +92,18 @@
     <div class="registroNewPaciente" id="info">
         <div class="container_registroNewPaciente" id="formData">
             <h2>Ingresar Datos</h2>
-            <form name="newPacient" method="post">
-                <input type="number" name="id" placeholder="Documento" required>
+            <form name="newPaciente" method="post" >
+                <input type="number" name="id" placeholder="Documento" >
                 <br>
-                <input type="text" name="address" placeholder="Nombre" required>
+                <input type="text" name="address" placeholder="Dirección" >
                 <br>
-                <input type="text" name="city" placeholder="Apellido" required>
+                <input type="text" name="city" placeholder="Ciudad" >
                 <br>
-                <input type="number" name="birthday" placeholder="Fecha de Nacimiento" required>
+                <input type="date" name="birthday" placeholder="Fecha de Nacimiento" >
                 <br>
-                <input type="number" name="latitude" placeholder="Latitud" required>
+                <input type="text" name="latitude" placeholder="Latitud" >
                 <br>
-                <input type="number" name="longitud" placeholder="longitud" required>
+                <input type="text" name="longitud" placeholder="longitud" >
                 <br>
                 <input type="submit" value="Ingresar Datos">
             </form>
@@ -113,6 +113,8 @@
 
         </div>
     </div>
+
+    <script src="./js/newPaciente.js"></script>
 </body>
 
 </html>

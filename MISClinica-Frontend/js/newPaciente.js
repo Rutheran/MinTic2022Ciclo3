@@ -1,6 +1,5 @@
 const newPacienteUrl = 'https://minclinica.herokuapp.com/newPaciente'
 
-
 function validate_id(val) {
     if (Number(val) > 1000)
         return true;
@@ -11,7 +10,6 @@ function validate_id(val) {
 
 function collectData(evt) {
     evt.preventDefault();
-
     const id = document.newPaciente.id.value;
     const address = document.newPaciente.address.value.trim();
     const city = document.newPaciente.city.value.trim();
@@ -26,7 +24,7 @@ function collectData(evt) {
     }
     
     const paciente = {
-        id: id,
+        userID: id,
         address: address,
         city: city,
         birthday: birthday,
@@ -34,8 +32,6 @@ function collectData(evt) {
         longitud:longitud
     }
     console.log(paciente);
-    const dataToSend = JSON.stringify(paciente);
-    savePaciente(dataToSend);
 }
 
 function savePaciente(data) {
