@@ -1,24 +1,6 @@
 const API_URL = "https://minclinica.herokuapp.com/getOnePaciente/";
 json = [];
 
-// async function getAllPacients() {
-//   await fetch("https://minclinica.herokuapp.com/getAllPacientes")
-//     .then((response) => {
-//       // console.log(response);
-//       if (response.ok) return response.text();
-//       else throw new Error(response.status);
-//     })
-//     .then((data) => {
-//       pacientes = JSON.parse(data);
-//       // console.log(pacientes);
-//       getOnePacient(pacientes);
-//     })
-//     .catch((error) => {
-//       console.error("ERROR: ", error.message);
-//       handleError();
-//     });
-// }
-
 async function getOnePacient(pacientes) {
   let id_paciente = document.getElementById("searchId").value;
 
