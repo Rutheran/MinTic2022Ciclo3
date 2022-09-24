@@ -32,7 +32,7 @@ def newPaciente(request):
             data = json.loads(request.body)
             pers = Persona.objects.filter(id = data["personaId"]).first()
             if (not pers):
-                return HttpResponseBadRequest("No existe cliente con esa cédula.")
+                return HttpResponseBadRequest("No existe persona con esa cédula.")
 
             paci = Paciente.objects.filter(id = data["pacienteId"]).first()
             if (paci):
@@ -61,10 +61,10 @@ def newFamiliar(request):
 
             persona = Persona.objects.filter(id = data["personaId"]).first()
             if (not persona):
-                return HttpResponseBadRequest("No existe persona con ese Id")
+                return HttpResponseBadRequest("No existe persona con esa cédula.")
             paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
             if (not paciente):
-                return HttpResponseBadRequest("No existe Paciente con ese Id")    
+                return HttpResponseBadRequest("No existe paciente con esa identificación")    
         
             familiar = Familiar(
                     persona = persona,
@@ -73,7 +73,7 @@ def newFamiliar(request):
                     email = data["email"],               
                 )
             familiar.save()
-            return HttpResponse("Nueva familiar agregado")
+            return HttpResponse("Nuevo familiar agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
@@ -81,24 +81,26 @@ def newFamiliar(request):
 
 def newMedico(request):
     if request.method == 'POST':
-        try:
+        # try:
             data = json.loads(request.body)
             pers = Persona.objects.filter(id = data["personaId"]).first()
             if (not pers):
                 return HttpResponseBadRequest("No existe persona con esa cédula.")
-            paci = Paciente.objects.filter(id = data["pacienteId"]).first()
-            if (not paci):
-                return HttpResponseBadRequest("No existe Paciente con ese Id")
-            
-            medico = Medico (
-                    persona = pers,
-                    paciente = paci,
-                    registro = data["registro"],
-                )    
-            medico .save()
+               
+            medi = Medico.objects.filter(id = data["medicoId"]).first()
+            if (medi):
+                return HttpResponseBadRequest("Ya existe un médico con ese documento de identidad")
+            else:     
+                medico = Medico (
+                        id = data["personaId"],
+                        persona = pers,
+                        especialidad = data["especialidad"],
+                        registro = data["registro"],
+                    )    
+                medico .save()
             return HttpResponse("Nuevo médico agregado")
-        except:
-            return HttpResponseBadRequest("Error en los datos enviados")
+        # except:
+        #     return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
 

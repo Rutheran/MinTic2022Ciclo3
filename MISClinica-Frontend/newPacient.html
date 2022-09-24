@@ -88,8 +88,85 @@
 
         <div class=" px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen ml-60">
             <!-- Content -->
+            <h1 class="text-center text-4xl bold mt-10">Crear un nuevo Paciente</h1>
+            <div class="grid justify-center">
+                <div class=" w-96 grid justify-center mt-20" id="info">
+                    <div class="w-[inherit]">
+                        <div class="">
+                            <div class="md:mt-0">
+                                <form id="formPaciente" name="newPaciente" method="post">
+                                    <div class="overflow-hidden shadow sm:rounded-md">
+                                        <div class="bg-white px-4 py-5 sm:p-6">
+                                            <div class="grid grid-cols-6 gap-6">
+                                                <div class="col-span-6 sm:col-span-4">
+                                                    <label for="id-dni"
+                                                        class="block text-sm font-medium text-gray-700">Documento de
+                                                        identidad</label>
+                                                    <input type="number" name="id" id="id-dni"
+                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        required>
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-4">
+                                                    <label for="id-dni"
+                                                        class="block text-sm font-medium text-gray-700">Dirección</label>
+                                                    <input type="text" name="address" id="id-dni"
+                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        required>
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-4">
+                                                    <label for="id-dni"
+                                                        class="block text-sm font-medium text-gray-700">Ciudad</label>
+                                                    <input type="text" name="city" id="id-dni"
+                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        required>
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-4">
+                                                    <label for="id-dni"
+                                                        class="block text-sm font-medium text-gray-700">Fecha de nacimiento</label>
+                                                    <input type="date" name="birthday" id="id-dni"
+                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        required>
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="id-dni"
+                                                        class="block text-sm font-medium text-gray-700">Latitud</label>
+                                                    <input type="text" name="latitude" id="id-dni"
+                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        required>
+                                                </div>
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="id-dni"
+                                                        class="block text-sm font-medium text-gray-700">Longitud</label>
+                                                    <input type="text" name="longitud" id="id-dni"
+                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        required>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                            <button type="submit"
+                                                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Registrar
+                                                Persona</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="success"></div>
+                    </div>
+                </div>
+            </div>
+
 <!-- formulario nueva paciente  -->
-    <div class="registroNewPaciente" id="info">
+    <!-- <div class="registroNewPaciente" id="info">
         <div class="container_registroNewPaciente" id="formData">
             <h2>Ingresar Datos</h2>
             <form name="newPaciente" method="post" >
@@ -108,7 +185,7 @@
                 <input type="submit" value="Ingresar Datos">
             </form>
         </div>
-    </div>
+    </div> -->
 
 
         </div>

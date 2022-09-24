@@ -29,51 +29,64 @@ function collectData(evt) {
         email: email
     }
     console.log(familiar);
-    saveFamiliar(familiar)
+    let data = JSON.stringify(familiar);
+    saveFamiliar(data)
 }
 
-function saveFamiliar(data) {
+async function saveFamiliar(data) {
     // Petición HTTP
-    fetch(newFamiliarUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/json"
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            console.log(response);
-            if (response.ok)
-                return response.text()
-            else
-                throw new Error(response.text());
-        })
-        .then(data => {
-            console.log(data);
-            handleSuccess();
-        })
-        .catch(error => {
-            console.error("ERROR: ", error.message);
-            handleError(error.message);
-        });
-}
-
-
-function handleSuccess() {
-    document.getElementById("formData").remove();
-    const message = document.createElement("p");
-    message.innerText = "Familiar creado exitosamente.";
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    var raw = data;
+  
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+  
+    await fetch(newFamiliarUrl, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        if (result === "Nuevo familiar agregado") {
+          handleSuccess(result);
+        } else if (result === "No existe persona con esa cédula.") {
+          handleError(result);
+        } else if (
+          result === "No existe paciente con esa identificación"
+        ) {
+          handleError(result);
+        }
+      });
+  }
+  
+  function handleSuccess(msg) {
+    document.getElementById("formFamiliar").reset();
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <div class="px-4 py-5 sm:px-6" id="success">
+    <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">${msg}</h3>
+  </div>
+  `;
+    document.getElementById("success").remove();
     const info = document.getElementById("info");
-    info.appendChild(message);
-}
-
-function handleError(msg) {
-    document.getElementById("formData").remove();
-    const message = document.createElement("p");
-    message.innerText = "No se pudo crear el Familiar. Intente luego. " + msg;
+    info.appendChild(div);
+  }
+  
+  function handleError(msg) {
+    document.getElementById("formFamiliar").reset();
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <div class=" px-4 py-5 sm:px-6" id="success">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">Verifica bien el número de identificación. ${msg}</h3>
+    </div>
+    `;
+    document.getElementById("success").remove();
     const info = document.getElementById("info");
-    info.appendChild(message);
-}
-
+    info.appendChild(div);
+  }
 // --------------------
 document.newFamiliar.addEventListener("submit", collectData);

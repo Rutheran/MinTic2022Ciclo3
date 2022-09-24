@@ -7,8 +7,9 @@ function validate_names(val) {
 }
 
 function validate_id(val) {
-  if (Number(val) > 1000) return true;
-  else return false;
+  if (Number(val) > 1000) {
+    if (Number(val <= 9999999999)) return true;
+  } else return false;
 }
 
 function collectData(evt) {
@@ -38,36 +39,40 @@ function collectData(evt) {
   savePersona(dataToSend);
 }
 
-function savePersona(data) {
+async function savePersona(data) {
   // Petición HTTP
-  fetch(newPersonaUrl, {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = data;
+
+  var requestOptions = {
     method: "POST",
-    headers: {
-      "Content-Type": "text/json",
-    },
-    body: data,
-  })
-    .then((response) => {
-      console.log(response);
-      if (response.ok) return response.text();
-      else throw new Error(response.text());
-    })
-    .then((data) => {
-      console.log(data);
-      handleSuccess();
-    })
-    .catch((error) => {
-      console.error("ERROR: ", error.message);
-      //   handleError(error.message);
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  await fetch(newPersonaUrl, requestOptions)
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+      if (result === "Nueva persona agregada") {
+        handleSuccess(result);
+      } else if (
+        result === "Ya existe una persona con ese documento de identidad"
+      ) {
+        handleError(result);
+      }
     });
 }
 
-function handleSuccess() {
-  // document.getElementById("formData").remove();
+function handleSuccess(msg) {
+  document.getElementById("formPerson").reset();
   const div = document.createElement("div");
   div.innerHTML = `
-  <div class="px-4 py-5 sm:px-6">
-  <h3 class="text-lg font-medium leading-6 text-gray-900">Persona creada exitosamente</h3>
+  <div class="px-4 py-5 sm:px-6" id="success">
+  <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">${msg}</h3>
 </div>
 `;
   document.getElementById("success").remove();
@@ -75,13 +80,18 @@ function handleSuccess() {
   info.appendChild(div);
 }
 
-// function handleError(msg) {
-//   // document.getElementById("formData").remove();
-//   const message = document.createElement("p");
-//   message.innerText = "No se pudo crear la persona. Intente luego. " + msg;
-//   const info = document.getElementById("info");
-//   info.appendChild(message);
-// }
+function handleError(msg) {
+  document.getElementById("formPerson").reset();
+  const div = document.createElement("div");
+  div.innerHTML = `
+    <div class=" px-4 py-5 sm:px-6" id="success">
+    <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">Verifica bien el número de identificación. ${msg}</h3>
+  </div>
+  `;
+  document.getElementById("success").remove();
+  const info = document.getElementById("info");
+  info.appendChild(div);
+}
 
 // --------------------
 document.newPerson.addEventListener("submit", collectData);

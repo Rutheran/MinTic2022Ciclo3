@@ -1,75 +1,87 @@
-const newMedicoUrl = 'https://minclinica.herokuapp.com/newMedico'
+const newMedicoUrl = "https://minclinica.herokuapp.com/newMedico";
 
 function validate_id(val) {
-    if (Number(val) > 1000)
-        return true;
-    else
-        return false;
+  if (Number(val) > 1000) return true;
+  else return false;
 }
-
 
 function collectData(evt) {
-    evt.preventDefault();
-    const id = document.newMedico.id.value;
-    const paciente = document.newMedico.idPaciente.value.trim();
-    const registro = document.newMedico.registro.value.trim();
+  evt.preventDefault();
+  const id = document.newMedico.id.value;
+  const especialidad = document.newMedico.especialidad.value.trim();
+  const registro = document.newMedico.registro.value.trim();
 
-    let result = validate_id(id);
-    if (!result) {
-        alert('Cédula no es válida');
-        return;
-    }
-    
-    const medico = {
-        personaId: id,
-        pacienteId: paciente,
-        registro: registro 
-    }
-    console.log(medico);
-    saveMedico(medico)
+  let result = validate_id(id);
+  if (!result) {
+    alert("Cédula no es válida");
+    return;
+  }
+
+  const medico = {
+    personaId: id,
+    medicoId: id,
+    especialidad: especialidad,
+    registro: registro,
+  };
+  console.log(medico);
+  let data = JSON.stringify(medico);
+  saveMedico(data);
 }
 
-function saveMedico(data) {
-    // Petición HTTP
-    fetch(newMedicoUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/json"
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            console.log(response);
-            if (response.ok)
-                return response.text()
-            else
-                throw new Error(response.text());
-        })
-        .then(data => {
-            console.log(data);
-            handleSuccess();
-        })
-        .catch(error => {
-            console.error("ERROR: ", error.message);
-            handleError(error.message);
-        });
+async function saveMedico(data) {
+  // Petición HTTP
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = data;
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  await fetch(newMedicoUrl, requestOptions)
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+      if (result === "Nuevo médico agregado") {
+        handleSuccess(result);
+      } else if (result === "No existe persona con esa cédula.") {
+        handleError(result);
+      } else if (
+        result === "Ya existe un médico con ese documento de identidad"
+      ) {
+        handleError(result);
+      }
+    });
 }
 
-
-function handleSuccess() {
-    document.getElementById("formData").remove();
-    const message = document.createElement("p");
-    message.innerText = "Medico creado exitosamente.";
-    const info = document.getElementById("info");
-    info.appendChild(message);
+function handleSuccess(msg) {
+  document.getElementById("formMedico").reset();
+  const div = document.createElement("div");
+  div.innerHTML = `
+  <div class="px-4 py-5 sm:px-6" id="success">
+  <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">${msg}</h3>
+</div>
+`;
+  document.getElementById("success").remove();
+  const info = document.getElementById("info");
+  info.appendChild(div);
 }
 
 function handleError(msg) {
-    document.getElementById("formData").remove();
-    const message = document.createElement("p");
-    message.innerText = "No se pudo crear el Medico. Intente luego. " + msg;
-    const info = document.getElementById("info");
-    info.appendChild(message);
+  document.getElementById("formMedico").reset();
+  const div = document.createElement("div");
+  div.innerHTML = `
+    <div class=" px-4 py-5 sm:px-6" id="success">
+    <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">Verifica bien el número de identificación. ${msg}</h3>
+  </div>
+  `;
+  document.getElementById("success").remove();
+  const info = document.getElementById("info");
+  info.appendChild(div);
 }
 
 // --------------------
