@@ -1,10 +1,20 @@
 const API_URL = "https://minclinica.herokuapp.com/getOnePaciente/";
 json = [];
 
+function obtenerToken (){
+  const accessToken = sessionStorage.getItem("accessToken");
+  console.log("Tenemos el token en el otro archivo: " + accessToken);
+
+}
+
 async function getOnePacient(pacientes) {
   let id_paciente = document.getElementById("searchId").value;
 
-  await fetch(`${API_URL}${id_paciente}`)
+  await fetch(`${API_URL}${id_paciente}`, {
+    header: {
+      Authorization: "Bearer " + accessToken,
+    },
+  })
     .then((response) => {
       // console.log(response);
       if (response.ok) return response.text();
@@ -78,3 +88,4 @@ const handlePaciente = (pasc) => {
   info.appendChild(pacDiv);
 };
 
+window.onload = obtenerToken;
