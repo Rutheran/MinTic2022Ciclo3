@@ -1,6 +1,10 @@
 import json
 import datetime
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
+from django.conf import settings
+from rest_framework_simplejwt.backends import TokenBackend
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Familiar, Persona, Paciente, Medico, JefeEnfermeria, EnfermeroAuxiliar
 
 

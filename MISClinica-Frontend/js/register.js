@@ -67,6 +67,7 @@ function handleSuccess(msg) {
   document.getElementById("success").remove();
   const info = document.getElementById("info");
   info.appendChild(div);
+  window.location.href = "./login.html";
 }
 
 function handleError(msg) {
