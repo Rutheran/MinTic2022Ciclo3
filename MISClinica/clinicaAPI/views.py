@@ -245,3 +245,32 @@ def login(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+
+def updateMedico(request, id):
+    if request.method == 'PUT':
+        try:
+            persona = Persona.objects.filter(id = id).first()
+            if (not persona):
+                return HttpResponseBadRequest("No existe persona con esa cédula.")
+
+            medico = Medico.objects.filter(persona = id).first()
+            if (not medico):
+                return HttpResponseBadRequest("No existe médico con esa cédula.")
+
+            data = json.loads(request.body)
+            if 'firstName' in data.keys():
+                persona.firstName = data["firstName"]
+            if 'lastName' in data.keys():
+                persona.lastName = data["lastName"]
+            if 'especialidad' in data.keys():
+                medico.especialidad = data["especialidad"]
+            if 'registro' in data.keys():
+                medico.registro = data["registro"]
+            persona.save()
+            medico.save()  
+            return HttpResponse("Datos de un médico actualizados")
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['PUT'], "Método inválido")
