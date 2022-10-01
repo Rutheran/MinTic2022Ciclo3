@@ -1,12 +1,8 @@
 const API_URL = "https://minclinica.herokuapp.com/getOnePaciente/";
-// const API_URL = "http://127.0.0.1:8000/getOnePaciente/";
+
 json = [];
 
-// function obtenerToken (){
-//   const accessToken = sessionStorage.getItem("accessToken");
-//   console.log("Tenemos el token en el otro archivo: " + accessToken);
 
-// }
 
 function getOnePacient(pacientes) {
   let id_paciente = document.getElementById("searchId").value;
@@ -32,7 +28,6 @@ function getOnePacient(pacientes) {
       console.error("ERROR: ", error.message);
       // handleError();
     });
-  // getOnePacient();
 }
 
 const handlePaciente = (pasc) => {
@@ -91,4 +86,3 @@ const handlePaciente = (pasc) => {
   info.appendChild(pacDiv);
 };
 
-// window.onload = obtenerToken;

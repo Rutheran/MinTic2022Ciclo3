@@ -1,6 +1,6 @@
 medicos = [];
-// const API_URL = "https://minclinica.herokuapp.com/getAllMedico";
-const API_URL = "http://127.0.0.1:8000/getAllMedico";
+const API_URL = "https://minclinica.herokuapp.com/getAllMedico";
+
 
 function getAllMedicos() {
   fetch(API_URL)
