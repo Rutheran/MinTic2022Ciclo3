@@ -1,6 +1,10 @@
 import json
 import datetime
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
+from django.conf import settings
+from rest_framework_simplejwt.backends import TokenBackend
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Familiar, Persona, Paciente, Medico, JefeEnfermeria, EnfermeroAuxiliar
 
 
@@ -221,33 +225,47 @@ def getOnePaciente(request, id):
     else:
         return HttpResponseNotAllowed(['GET'], "Método inválido")
 
+
+def getAllMedico(request):
+    if request.method == 'GET':
+        medicos = Medico.objects.all()
+        if (not medicos):
+            return HttpResponseBadRequest("No hay Médicos en la base de datos.")
+
+        personas = Persona.objects.all()
+        if (not personas):
+            return HttpResponseBadRequest("No hay personas en la base de datos.")
+
+        allMedicoData = []
+
+        for x in medicos:
+            for y in personas:
+                if x.id == y.id:
+                    data = {    
+                        "id": x.id,
+                        "dni": y.id,
+                        "firstName": y.firstName,
+                        "lastName": y.lastName,
+                        "phone": y.phone,
+                        "gender": y.gender,
+                        "registro": x.registro, 
+                        "especialidad": x.especialidad, 
+                        }
+                    allMedicoData.append(data)        
+        
+        dataJson = json.dumps(allMedicoData)
+        resp = HttpResponse()
+        resp.headers['Content-Type'] = "text/json"
+        resp.content = dataJson
+        return resp
+    else: 
+        return HttpResponseNotAllowed(['GET'], "Método inválido")
+ 
 #-----------------
-# Login
+# Update
 #-----------------
 
-def login(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            id = data['id']
-            password = data['password']
-
-            customer = EnfermeroAuxiliar.objects.filter(id = id, password = password).first()
-            if (not customer):
-                return HttpResponse("Credenciales inválidas.", status=401)
-
-            custData = {"id": customer.id}
-            resp = HttpResponse()
-            resp.headers['Content-Type'] = "text/json"
-            resp.content = json.dumps(custData)
-            return resp
-        except:
-            return HttpResponseBadRequest("Error en los datos enviados")
-    else:
-        return HttpResponseNotAllowed(['POST'], "Método inválido")
-
-
-def updateMedico(request, id):
+ def updateMedico(request, id):
     if request.method == 'PUT':
         try:
             persona = Persona.objects.filter(id = id).first()
@@ -274,3 +292,32 @@ def updateMedico(request, id):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['PUT'], "Método inválido")
+
+#-----------------
+# Login
+#-----------------
+
+def login(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            id = data['id']
+            password = data['password']
+
+            customer = EnfermeroAuxiliar.objects.filter(id = id, password = password).first()
+            if (not customer):
+                return HttpResponse("Credenciales inválidas.", status=401)
+
+            custData = {"id": customer.id}
+            resp = HttpResponse()
+            resp.headers['Content-Type'] = "text/json"
+            resp.content = json.dumps(custData)
+            return resp
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+
+
+
