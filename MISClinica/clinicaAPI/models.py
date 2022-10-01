@@ -52,7 +52,7 @@ class EnfermeroAuxiliar (AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=255)
 
     def save (self, **kwargs):
-        some_salt = 'dGGWEs51X'
+        some_salt = 'mMUj0DrIK6vgtdIYepkIxN'
         self.password = make_password(self.password, some_salt)
         super().save(**kwargs)
     

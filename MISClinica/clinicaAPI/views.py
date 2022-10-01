@@ -1,6 +1,10 @@
 import json
 import datetime
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
+from django.conf import settings
+from rest_framework_simplejwt.backends import TokenBackend
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Familiar, Persona, Paciente, Medico, JefeEnfermeria, EnfermeroAuxiliar
 
 
@@ -220,6 +224,41 @@ def getOnePaciente(request, id):
         return resp
     else:
         return HttpResponseNotAllowed(['GET'], "Método inválido")
+        
+def getAllMedico(request):
+    if request.method == 'GET':
+        medicos = Medico.objects.all()
+        if (not medicos):
+            return HttpResponseBadRequest("No hay Médicos en la base de datos.")
+
+        personas = Persona.objects.all()
+        if (not personas):
+            return HttpResponseBadRequest("No hay personas en la base de datos.")
+
+        allMedicoData = []
+
+        for x in medicos:
+            for y in personas:
+                if x.id == y.id:
+                    data = {    
+                        "id": x.id,
+                        "dni": y.id,
+                        "firstName": y.firstName,
+                        "lastName": y.lastName,
+                        "phone": y.phone,
+                        "gender": y.gender,
+                        "registro": x.registro, 
+                        "especialidad": x.especialidad, 
+                        }
+                    allMedicoData.append(data)        
+        
+        dataJson = json.dumps(allMedicoData)
+        resp = HttpResponse()
+        resp.headers['Content-Type'] = "text/json"
+        resp.content = dataJson
+        return resp
+    else: 
+        return HttpResponseNotAllowed(['GET'], "Método inválido")
 
 #---------------
 # Update
@@ -258,13 +297,37 @@ def updatePaciente (request, id):
             paciente.save()
             persona.save()
             return HttpResponse("Paciente actualizado")
+
+
+
+ def updateMedico(request, id):
+    if request.method == 'PUT':
+        try:
+            persona = Persona.objects.filter(id = id).first()
+            if (not persona):
+                return HttpResponseBadRequest("No existe persona con esa cédula.")
+
+            medico = Medico.objects.filter(persona = id).first()
+            if (not medico):
+                return HttpResponseBadRequest("No existe médico con esa cédula.")
+
+            data = json.loads(request.body)
+            if 'firstName' in data.keys():
+                persona.firstName = data["firstName"]
+            if 'lastName' in data.keys():
+                persona.lastName = data["lastName"]
+            if 'especialidad' in data.keys():
+                medico.especialidad = data["especialidad"]
+            if 'registro' in data.keys():
+                medico.registro = data["registro"]
+            persona.save()
+            medico.save()  
+            return HttpResponse("Datos de un médico actualizados")
+
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['PUT'], "Método inválido")
-            
-
-
 
 
 #-----------------
@@ -291,3 +354,7 @@ def login(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+
+
+
