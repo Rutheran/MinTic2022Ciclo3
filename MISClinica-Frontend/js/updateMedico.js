@@ -1,39 +1,69 @@
-// const UpdateMedicoUrl = 'https://minclinica.herokuapp.com/UpdateMedico'
-const updateMedicoUrl = 'http://127.0.0.1:8000/updateMedico/'
+const API_URL = "https://minclinica.herokuapp.com/getOneMedico/";
+const updateMedicoUrl = "https://minclinica.herokuapp.com/updateMedico/";
 
-// function validate_id(val) {
-//   if (Number(val) > 1000) return true;
-//   else return false;
-// }
+let id;
 
+function getOnePacient(medico) {
+  let id_medico = document.getElementById("searchId").value;
 
-const id = document.updateMedico.id.value;
+  fetch(`${API_URL}${id_medico}`)
+    .then((response) => {
+      // console.log(response);
+      if (response.ok) return response.text();
+      else throw new Error(response.status);
+    })
+    .then((data) => {
+      medico = JSON.parse(data);
+      id = medico.id;
+      collectValues(medico);
+    })
+    .catch((error) => {
+      alert("Verifica el documento de identidad, no lo encontramos en la BD");
+      // console.error("ERROR: ", error.message);
+      // handleError();
+    });
+}
+
+function validate_names(val) {
+  const letters = /^[A-Z a-z]+$/;
+  if (val.match(letters)) return true;
+  else return false;
+}
+
+function collectValues(data) {
+  // document.getElementById("id").value = data.id;
+  document.getElementById("firstName").value = data.firstName;
+  document.getElementById("lastName").value = data.lastName;
+  document.getElementById("phone").value = data.phone;
+  document.getElementById("gender").value = data.gender;
+  document.getElementById("especialidad").value = data.especialidad;
+  document.getElementById("registro").value = data.registro;
+
+}
+
 function collectData(evt) {
   evt.preventDefault();
 
   const firstName = document.updateMedico.firstName.value.trim();
   const lastName = document.updateMedico.lastName.value.trim();
+  const phone = document.updateMedico.phone.value;
+  const gender = document.updateMedico.gender.value;
   const especialidad = document.updateMedico.especialidad.value.trim();
   const registro = document.updateMedico.registro.value.trim();
-
-
-  // let result = validate_id(id);
-  // if (!result) {
-  //   alert("Cédula no es válida");
-  //   return;
-  // }
 
 
   const medico = {
     firstName: firstName,
     lastName: lastName,
+    phone: phone,
+    gender: gender,
     especialidad: especialidad,
-    registro: registro
-  };
+    registro: registro,
 
+  };
   console.log(medico);
-  let data = JSON.stringify(medico);
-  saveMedico(data)
+  const dataToSend = JSON.stringify(medico);
+  saveMedico(dataToSend);
 }
 
 async function saveMedico(data) {
@@ -50,21 +80,24 @@ async function saveMedico(data) {
     redirect: "follow",
   };
 
-  const id = document.updateMedico.id.value; 
   await fetch(`${updateMedicoUrl}${id}`, requestOptions)
     .then((response) => response.text())
     .then((result) => {
       console.log(result);
-      if (result === "Datos de un médico actualizados") {
-        handleSuccess(result);
-      } else if (result === "Error en la actualización de datos de un médico.") {
-        handleError(result);
-      }
+      handleSuccess(result);
+      // if (result === "Paciente atualizado") {
+      //   handleSuccess(result);
+      // }
+      // } else if (result === "No existe persona con esa cédula.") {
+      //   handleError(result);
+      // } else if (result === "Ya se han actualizado los datos ") {
+      //   handleError(result);
+      // }
     });
 }
 
 function handleSuccess(msg) {
-  // document.getElementById("formMedico").reset();
+  // document.getElementById("formPaciente").reset();
   const div = document.createElement("div");
   div.innerHTML = `
     <div class="px-4 py-5 sm:px-6" id="success">
@@ -74,10 +107,12 @@ function handleSuccess(msg) {
   document.getElementById("success").remove();
   const info = document.getElementById("info");
   info.appendChild(div);
+  alert("Médico actualizado")
+  location.reload();
 }
 
 function handleError(msg) {
-  // document.getElementById("formMedico").reset();
+  document.getElementById("formMédico").reset();
   const div = document.createElement("div");
   div.innerHTML = `
       <div class=" px-4 py-5 sm:px-6" id="success">
@@ -88,13 +123,6 @@ function handleError(msg) {
   const info = document.getElementById("info");
   info.appendChild(div);
 }
-
-function showOldData() {
-
-
-}
-
-
 
 // --------------------
 document.updateMedico.addEventListener("submit", collectData);
