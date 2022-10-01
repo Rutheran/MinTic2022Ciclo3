@@ -265,7 +265,7 @@ def getAllMedico(request):
 # Update
 #-----------------
 
- def updateMedico(request, id):
+def updateMedico(request, id):
     if request.method == 'PUT':
         try:
             persona = Persona.objects.filter(id = id).first()
