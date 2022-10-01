@@ -15,5 +15,6 @@ urlpatterns = [
     path('newFamiliar', views.newFamiliar, name='newFamiliar'),
     path('newPersona', views.newPersona, name='newPersona'),
     path('newMedico', views.newMedico, name='medico'),
+    path('getAllMedico', views.getAllMedico, name='getAllMedico'),
 ]
 
