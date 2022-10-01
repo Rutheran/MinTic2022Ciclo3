@@ -297,7 +297,10 @@ def updatePaciente (request, id):
             paciente.save()
             persona.save()
             return HttpResponse("Paciente actualizado")
-
+        except:
+            return HttpResponseBadRequest("Error en los datos enviados")
+    else:
+        return HttpResponseNotAllowed(['PUT'], "Método inválido")
 
 
 def updateMedico(request, id):
@@ -316,6 +319,10 @@ def updateMedico(request, id):
                 persona.firstName = data["firstName"]
             if 'lastName' in data.keys():
                 persona.lastName = data["lastName"]
+            if "phone" in data.keys ():
+                persona.phone = data["phone"]
+            if "gender" in data.keys():
+                persona.gender = data["gender"]
             if 'especialidad' in data.keys():
                 medico.especialidad = data["especialidad"]
             if 'registro' in data.keys():
