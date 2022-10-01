@@ -224,8 +224,7 @@ def getOnePaciente(request, id):
         return resp
     else:
         return HttpResponseNotAllowed(['GET'], "Método inválido")
-
-
+        
 def getAllMedico(request):
     if request.method == 'GET':
         medicos = Medico.objects.all()
@@ -260,10 +259,46 @@ def getAllMedico(request):
         return resp
     else: 
         return HttpResponseNotAllowed(['GET'], "Método inválido")
- 
-#-----------------
+
+#---------------
 # Update
-#-----------------
+# --------------
+
+def updatePaciente (request, id):
+    if request.method == 'PUT':
+        try:
+            paciente = Paciente.objects.filter(id = id).first()
+            if (not paciente):
+                return HttpResponseBadRequest("No existe paciente con esa cédula.")
+
+            persona = Persona.objects.filter(paciente = id).first()
+            if (not persona):
+                return HttpResponseBadRequest("No existe paciente con esa cédula.")
+
+            data = json.loads(request.body)
+            if "firstName" in data.keys():
+                persona.firstName = data["firstName"]
+            if "lastName" in data.keys():
+                persona.lastName = data["lastName"] 
+            if "phone" in data.keys ():
+                persona.phone = data["phone"]
+            if "gender" in data.keys():
+                persona.gender = data["gender"]
+            if "address" in data.keys():
+                paciente.address = data["address"]
+            if "city" in data.keys():
+                paciente.city = data["city"]
+            if "birthday" in data.keys():
+                paciente.birthday = data["birthday"]
+            if "latitude" in data.keys():
+                paciente.latitude = data["latitude"]
+            if "longitud" in data.keys():
+                paciente.longitud = data["longitud"]
+            paciente.save()
+            persona.save()
+            return HttpResponse("Paciente actualizado")
+
+
 
 def updateMedico(request, id):
     if request.method == 'PUT':
@@ -288,10 +323,12 @@ def updateMedico(request, id):
             persona.save()
             medico.save()  
             return HttpResponse("Datos de un médico actualizados")
+
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['PUT'], "Método inválido")
+
 
 #-----------------
 # Login
