@@ -245,3 +245,38 @@ def login(request):
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
+
+def getAllMedico(request):
+    if request.method == 'GET':
+        medicos = Medico.objects.all()
+        if (not medicos):
+            return HttpResponseBadRequest("No hay Médicos en la base de datos.")
+
+        personas = Persona.objects.all()
+        if (not personas):
+            return HttpResponseBadRequest("No hay personas en la base de datos.")
+
+        allMedicoData = []
+
+        for x in medicos:
+            for y in personas:
+                if x.id == y.id:
+                    data = {    
+                        "id": x.id,
+                        "dni": y.id,
+                        "firstName": y.firstName,
+                        "lastName": y.lastName,
+                        "phone": y.phone,
+                        "gender": y.gender,
+                        "registro": x.registro, 
+                        "especialidad": x.especialidad, 
+                        }
+                    allMedicoData.append(data)        
+        
+        dataJson = json.dumps(allMedicoData)
+        resp = HttpResponse()
+        resp.headers['Content-Type'] = "text/json"
+        resp.content = dataJson
+        return resp
+    else: 
+        return HttpResponseNotAllowed(['GET'], "Método inválido")
